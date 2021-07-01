@@ -1,4 +1,4 @@
-# 01-github-explorer
+# 02-dtmoney
 
 ## Segundo projeto - Iginite Rocketseat
 
