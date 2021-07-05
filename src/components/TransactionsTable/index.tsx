@@ -13,10 +13,6 @@ interface Transaction {
 
 export function TransactionsTable() {
     const [transactions,setTransactions] = useState<Transaction[]>([])
-    // useEffect(() => {
-    //     api.get('transactions')
-    //         .then(response => console.log(response.data))
-    // },[])
 
     useEffect(() => {
         // fetch('http://localhost:3000/api/transactions/')
