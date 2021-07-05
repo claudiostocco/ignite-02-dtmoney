@@ -1,8 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { Container } from "./style";
 
+interface Transaction {
+    id: number
+    title: string
+    type: string
+    category: string
+    amount: number
+    createdAt: string
+}
+
 export function TransactionsTable() {
+    const [transactions,setTransactions] = useState<Transaction[]>([])
     // useEffect(() => {
     //     api.get('transactions')
     //         .then(response => console.log(response.data))
@@ -12,7 +22,10 @@ export function TransactionsTable() {
         // fetch('http://localhost:3000/api/transactions/')
         //     .then(response => response.json())
         //     .then(data => console.log(data))
-        api.get('transactions').then(response => console.log(response.data))
+
+
+        //console.log(response.data)
+        api.get('transactions').then(response => setTransactions(response.data.transactions))
 
         // api.get('versao').then(response => console.log('versa: ',response.data))
     },[])
@@ -29,18 +42,14 @@ export function TransactionsTable() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Teste</td>
-                        <td className="deposit">1500,00</td>
-                        <td>Dev</td>
-                        <td>01/07/2021</td>
-                    </tr>
-                    <tr>
-                        <td>Teste</td>
-                        <td className="withdraw">1500,00</td>
-                        <td>Dev</td>
-                        <td>01/07/2021</td>
-                    </tr>
+                    {transactions.map(data => (
+                        <tr key={data.id}>
+                            <td>{data.title}</td>
+                            <td className={data.type}>{new Intl.NumberFormat('pt-BR',{style: 'currency', currency: 'BRL'}).format(data.amount)  }</td>
+                            <td>{data.category}</td>
+                            <td>{new Intl.DateTimeFormat('pt-BR').format(new Date(data.createdAt))}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </Container>

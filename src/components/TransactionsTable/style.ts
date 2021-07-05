@@ -13,6 +13,10 @@ export const Container = styled.div`
             padding: 1rem 2rem;
             text-align: left;
             line-height: 1.5rem;
+
+            &:first-child + th {
+                text-align: right;
+            }
         }
 
         td {
@@ -24,6 +28,10 @@ export const Container = styled.div`
 
             &:first-child {
                 color: var(--text-title);
+            }
+
+            &:first-child + td {
+                text-align: right;
             }
 
             &.deposit {

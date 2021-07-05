@@ -21,7 +21,7 @@ export function NewTransactionModal({isOpen,onRequestClose}: NewTransactionModal
         event.preventDefault()
         const data = {title,value,type,category}
         api.post('/transactions',data)
-            .then(response => console.log(response))
+            .then(response => {if (response.status === 201) onRequestClose()})
     }
 
     return (
